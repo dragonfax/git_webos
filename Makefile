@@ -1204,7 +1204,7 @@ else
 endif
 endif
 
--include config.mak.autogen
+include config.mak.autogen
 -include config.mak
 
 ifndef sysconfdir

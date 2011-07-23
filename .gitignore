@@ -207,9 +207,7 @@
 /config.cache
 /config.log
 /config.status
-/config.mak.autogen
 /config.mak.append
-/configure
 /tags
 /TAGS
 /cscope*
