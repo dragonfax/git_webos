@@ -1,3 +1,31 @@
 I managed to cross-compile git for webos/arm devices.
 I'll include the modifications to the git source that made this possible.
 I'll also provide a precompile binary in another branch for convenience.
+
+The process was rather simple.
+This process was performed on Macos
+
+1. install Palm PDK for MacOS
+1. $ export PATH="/opt/PalmPDK/arm-gcc/arm-none-linux-gnueabi/bin/:$PATH"
+2. $ ./configure --host=arm-none-linux-gnueabi --build=x86-apple-darwin
+	 verify this says it detected cross-compilation, and completes with no issues.
+	 I suspect there were 2 issues I had to fix in this file.
+	 Where the configuration fails because 2 tests depend on the compiled being able to create and runnable executables on the local system.
+	 these are easily fixed by removing those parts fo the configure script.
+	 and just setting whatever variable they were going set if they passed.
+	 the post-altered configure script is checked in. incase you need to reduplicate this process.
+3. modify the generated config.mak.autogen
+	 adding NO_NSEC=Yes to the bottom of the file. to overcome to time structure issues.
+	 possibly adding -I and -L to include /opt/PalmPDK/include and /opt/PalmPDK/device/lib respectively.
+4. modify the Makefile to include the config.mak.autogen
+	 I may be mistaken on this one. I thinkt he Makefile is already including this file.
+5. make
+	 the make should run flawlessly, and leave you with a 'git' execution for ARM
+	 you can always verify this with a quick 
+	 $ file git
+
+if the git executable is still a MacOS darwin executable. Then it was using the mac gcc instead of the PalmPDK gcc.
+if you get errors about trying to link to libz.a in /opt/local,
+then you need to ensure the CFLAGS and LDFLAGS are getting through (i.e. are set in the config.mak.autogen or other files.
+
+To save time. See the git branch 'precompiled_binary' for a copy of the actual final binary that was generated.
