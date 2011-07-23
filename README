@@ -1,0 +1,4 @@
+this is a precompiled binary of git DVCS for the command line of webos/arm (v6 and up) system.
+if you have shell access to your webos device you can upload this executable and run it. 
+
+using this binary, on a palm pixi+, I was able to directly clone applications from git.webos-internals.org to my phone and run them.
