@@ -1,0 +1,3 @@
+I managed to cross-compile git for webos/arm devices.
+I'll include the modifications to the git source that made this possible.
+I'll also provide a precompile binary in another branch for convenience.
